@@ -3,7 +3,7 @@
 sudo chmod -R 777 /home/ec2-user/cicd-test
 
 # Navigate into our working directory where we have all our GitHub files
-cd /home/ec2-user/cicd-test/server
+cd /home/ec2-user/cicd/cicd-test/server
 
 # Add npm and node to path
 export NVM_DIR="$HOME/.nvm"

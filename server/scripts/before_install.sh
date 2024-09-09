@@ -4,7 +4,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 . ~/.nvm/nvm.sh
 nvm install node
 # Create our working directory if it doesn't exist
-DIR="/home/ec2-user/cicd-test/server"
+DIR="/home/ec2-user/cicd/cicd-test/server"
 if [ -d "$DIR" ]; then
   echo "${DIR} exists"
 else

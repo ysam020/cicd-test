@@ -198,7 +198,6 @@ import getDrivers from "./routes/tyre-maintenance/getDrivers.mjs";
 import driverAssignment from "./routes/tyre-maintenance/driverAssignment.mjs";
 import getTyreDetails from "./routes/tyre-maintenance/getTyreDetails.mjs";
 import getTruckDetails from "./routes/tyre-maintenance/getTruckDetails.mjs";
-import JobModel from "./model/jobModel.mjs";
 
 const MONGODB_URI =
   process.env.NODE_ENV === "production"
