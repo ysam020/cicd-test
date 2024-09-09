@@ -24,8 +24,6 @@ export PROD_CLIENT_URI=$(aws ssm get-parameter --name "PROD_CLIENT_URI" --query 
 export SERVER_MONGODB_URI=$(aws ssm get-parameter --name "SERVER_MONGODB_URI" --query "Parameter.Value" --output text)
 export SERVER_CLIENT_URI=$(aws ssm get-parameter --name "SERVER_CLIENT_URI" --query "Parameter.Value" --output text)
 
-echo "ACCESS_KEY is: $ACCESS_KEY"
-
 # Install node modules
 npm install
 npm install nodemon pm2 -g
