@@ -10,6 +10,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Loads nvm bash_completion
 
+# Set NODE_ENV to production
+export NODE_ENV=production
+
 # Retrieve all environment variables from SSM Parameter Store
 export ACCESS_KEY=$(aws ssm get-parameter --name "ACCESS_KEY" --query "Parameter.Value" --output text)
 export SECRET_ACCESS_KEY=$(aws ssm get-parameter --name "SECRET_ACCESS_KEY" --query "Parameter.Value" --output text)
@@ -24,5 +27,5 @@ export SERVER_CLIENT_URI=$(aws ssm get-parameter --name "SERVER_CLIENT_URI" --qu
 # Install node modules
 npm install
 
-# Start our node app in the background
-node app.mjs > app.out.log 2> app.err.log < /dev/null &
+# Start the Node.js app with PM2 in production mode
+pm2 start ecosystem.config.json --env production
