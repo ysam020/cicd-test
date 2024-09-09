@@ -26,6 +26,8 @@ export SERVER_CLIENT_URI=$(aws ssm get-parameter --name "SERVER_CLIENT_URI" --qu
 
 # Install node modules
 npm install
+npm install nodemon pm2
+npm install nodemon pm2 -g
 
 # Start the Node.js app with PM2 in production mode
 pm2 start ecosystem.config.json --env production
