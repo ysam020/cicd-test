@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/cicd-pipeline/server
+hooks:
+  ApplicationStop:
+    - location: server/scripts/application_stop.sh
+      timeout: 300
+      runas: ec2-user
+  BeforeInstall:
+    - location: server/scripts/before_install.sh
+      timeout: 300
+      runas: ec2-user
+  ApplicationStart:
+    - location: server/scripts/appplication_start.sh
+      timeout: 300
+      runas: ec2-user
