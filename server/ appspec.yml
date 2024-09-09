@@ -13,6 +13,8 @@ hooks:
       timeout: 300
       runas: ec2-user
   ApplicationStart:
-    - location: scripts/application_start.sh
+    - location: scripts/appplication_start.sh
       timeout: 300
       runas: ec2-user
+      script: |
+        source /home/ec2-user/exim-new/scripts/appplication_start.sh
