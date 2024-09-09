@@ -4,16 +4,20 @@ files:
   - source: /
     destination: /home/ec2-user/cicd-test
 hooks:
-  ApplicationStop:
-    - location: /home/ec2-user/cicd-test/server/scripts/application_stop.sh
+  BeforeInstall:
+    - location: server/scripts/before_install.sh
       timeout: 300
       runas: ec2-user
-  BeforeInstall:
-    - location: /home/ec2-user/cicd-test/server/scripts/before_install.sh
+      script: |
+        chmod +x /home/ec2-user/cicd-test/server/scripts/application_stop.sh
+        chmod +x /home/ec2-user/cicd-test/server/scripts/before_install.sh
+        chmod +x /home/ec2-user/cicd-test/server/scripts/application_start.sh
+  ApplicationStop:
+    - location: server/scripts/application_stop.sh
       timeout: 300
       runas: ec2-user
   ApplicationStart:
-    - location: /home/ec2-user/cicd-test/server/scripts/application_start.sh
+    - location: server/scripts/application_start.sh
       timeout: 300
       runas: ec2-user
       script: |
