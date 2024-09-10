@@ -246,7 +246,7 @@ if (cluster.isPrimary) {
 
       app.get("/", async (req, res) => {
         try {
-          res.send("hello world");
+          res.send("hello world 2");
         } catch (error) {
           res.status(500).send("An error occurred while updating the jobs");
         }
