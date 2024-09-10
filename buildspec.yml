@@ -6,11 +6,11 @@ phases:
       nodejs: 18.x
     commands:
       - cd client
-      - npm install --legacy-peer-deps
+      - yarn install --frozen-lockfile
 
   build:
     commands:
-      - npm run build
+      - yarn build
 
 artifacts:
   base-directory: client/build
