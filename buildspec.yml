@@ -6,7 +6,7 @@ phases:
       nodejs: 18.x
     commands:
       - cd client
-      - npm ci --legacy-peer-deps
+      - npm install --force
 
   build:
     commands:
