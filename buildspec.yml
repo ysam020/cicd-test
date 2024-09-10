@@ -8,14 +8,6 @@ phases:
       - cd client
       - npm install --legacy-peer-deps
 
-  pre_build:
-    commands:
-      - echo "Fetching environment variables from Parameter Store"
-      - export REACT_APP_API_STRING=$(aws ssm get-parameter --name "REACT_APP_API_STRING" --with-decryption --query Parameter.Value --output text)
-      - export REACT_APP_ACCESS_KEY=$(aws ssm get-parameter --name "REACT_APP_ACCESS_KEY" --with-decryption --query Parameter.Value --output text)
-      - export REACT_APP_SECRET_ACCESS_KEY=$(aws ssm get-parameter --name "REACT_APP_SECRET_ACCESS_KEY" --with-decryption --query Parameter.Value --output text)
-      - export REACT_APP_VERSION=$(aws ssm get-parameter --name "REACT_APP_VERSION" --with-decryption --query Parameter.Value --output text)
-
   build:
     commands:
       - npm run build
