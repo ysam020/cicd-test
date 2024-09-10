@@ -1,69 +1,172 @@
 
-# AlVision Exim Client Application
+# Export-Import Business & Office Administration (EXIM) MERN App
 
-## Description
+## Project Overview
 
-AlVision Exim is a comprehensive application designed to streamline export-import business processes, replacing manual Excel sheet management with a robust online system. This application supports various operations, such as automatic data ingestion from email attachments, manual data entry, dynamic report generation, and real-time updates on import and export consignments.
+The EXIM MERN application is designed to streamline operations related to the export-import business and manage various office administration tasks. The system is modular, with each module handling specific aspects of the business, such as import, export, administration, and document management.
 
-## Features
+### Key Features
 
-- **Admin Accounts**: Creation of two initial admin accounts with capabilities to onboard new employees and manage their access to different modules.
-- **Employee Management**: Admins can onboard new employees by providing details such as name, email, company, and designation. Employees receive credentials via email and can subsequently complete their profiles.
-- **Module-Based Access**: Specific modules can be assigned to or removed from employees by admins. Employees will have access only to the modules assigned to them.
-- **Data Handling**: Supports uploading and parsing of Excel sheets manually or from email attachments.
-- **Interactive Dashboards**: Visualization of operational data such as job statuses and detailed reports for specific importers using React-ApexCharts and MUI Data Grid.
-- **Document Management**: Ability to upload and manage documents via AWS S3.
+- **Employee Management:** HR can add new employees, who then receive credentials via email. Employees can complete their onboarding and KYC processes through dedicated modules.
+- **Modular Functionality:** Admins can assign specific modules to employees, granting them access to relevant areas of the application.
+- **Document Management:** Upload, manage, and download essential business documents within each module.
+- **Role-Based Access:** Certain actions, like uploading data or managing jobs, are restricted to admin users.
 
-## Modules
+## Modules Overview
 
-1. **Import Daily Status Report (DSR)**
-   - **Functionality**: Upload Excel sheets manually or automatically process them from email attachments. Update and manage data as required.
-   - **DSR Dashboard**: Features a selection tag to choose the financial year for displaying data, defaulting to the current year. Displays total, completed, pending, and canceled jobs. After selecting an importer, their specific job stats are shown in a donut chart.
-   - **Importer Selection**: Another tab allows selection of an importer to display a list of all jobs with the selected status, presented in tables using MUI DataGrid.
-   - **Document Upload**: Key documents are uploaded to AWS S3 (bucket: alvision-exim-images, region: ap-south-1).
-   - **Navigation**: Links within data tables navigate to detailed DSR pages.
-   - **Excel Operations**: On the dashboard, a button is provided to upload Excel sheets, converting them to JSON and saving the data in the backend database.
-   - **Jobs Tab**: Features a button to download the DSR for the selected importer and status.
+The application is divided into several broad categories, each containing specific modules:
 
-2. Import Delivery Order (DO)
-3. Import Operations
-4. Employee Onboarding
-5. Employee KYC
-6. Exit Feedback
-7. Accounts
-8. Customer KYC
-9. Inward Register
-10. Outward Register
-11. LR Report
-12. Tyre maintenance
+### 1. **Import Modules**
+   - **DSR (Detailed Status Report):**
+     - Admins can upload an Excel sheet containing job details.
+     - The uploaded data displays a list of jobs, which can be navigated and updated.
+     - Options are available to download the DSR for a selected importer or for all importers at once.
+   - **e-Sanchit:** Manage and store import-related documentation electronically.
+   - **Documentation:** Upload and organize documents related to import operations.
+   - **Submission:** Submit required documents to regulatory bodies.
+   - **DO (Delivery Order):** Handle delivery orders for imported goods.
+   - **Operations:** Manage the operational aspects of the import process.
 
-## Installation
+### 2. **Export Modules**
+   - **Export Operations:** Handle export-specific operations and documentation.
+   - **Export Documentation:** Manage documents related to export activities.
 
-To set up the AlVision Exim client application, follow these steps:
+### 3. **Admin Modules**
+   - **Employee Onboarding:** HR fills in basic employee details, and the employee completes the onboarding process.
+   - **Employee KYC:** Employees provide their KYC details.
+   - **Module Assignment:** Admins assign specific modules to employees.
 
-1. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   ```
-2. **Install the dependencies:**
-   ```bash
-   npm install
-   ```
-3. **Start the application:**
-   ```bash
-   npm start
-   ```
-4. **To build the application for production, use:**
-   ```bash
-   npm run build
-   ```
+### 4. **Inward and Outward Register**
+   - **Inward Register:** Log and manage inward shipments.
+   - **Outward Register:** Log and manage outward shipments.
 
-## Usage
+### 5. **SRCC (Special Risks Coverage Certificate)**
+   - **SRCC Directories:** Manage directories related to SRCC operations.
 
-- Start the application using the `npm start` command to launch the development server.
-- Use the `electron-dev` script for developing with Electron in a local environment.
+## Installation and Setup
 
-## Additional Notes
+### Prerequisites
 
-- Ensure that all environment variables and system prerequisites (like Node.js, npm, and Electron) are correctly set up before installing and running the application.
-- Configuration details for AWS S3 should be securely stored and managed via environment variables or configuration files.
+Ensure you have the following installed:
+
+- Node.js (v14 or higher)
+- MongoDB
+- npm or yarn
+
+### Clone the Repository
+
+git clone https://github.com/ysam020/exim-new.git
+cd exim-new
+
+### Install Dependencies
+
+#### For the Backend:
+
+cd server
+npm install
+
+#### For the Frontend:
+
+cd client
+npm install
+
+### Environment Variables
+
+Create a `.env` file in the `server` directory and add the required environment variables:
+env
+PORT=5000
+MONGO_URI=your_mongo_db_uri
+JWT_SECRET=your_jwt_secret
+EMAIL_SERVICE_API_KEY=your_email_service_api_key
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+
+### Run the Application
+
+#### Backend:
+
+cd server
+npm start
+
+#### Frontend:
+
+cd client
+npm start
+
+The application should now be running at `http://localhost:3000`.
+
+## Deployment
+
+### Server Deployment on AWS EC2
+
+1. Connect to your EC2 instance:
+
+ssh -i "your-key.pem" ec2-user@your-ec2-ip-address
+
+2. Remove any existing workspace directory:
+
+sudo rm -rf /home/ec2-user/workspace
+
+3. Create a new workspace directory:
+
+cd /home/ec2-user/
+mkdir workspace && cd workspace
+
+4. Clone the repository:
+
+git clone 'https://github.com/ysam020/exim-new.git'
+
+5. Navigate to the server directory:
+
+cd exim-new/server
+
+6. Install dependencies:
+
+npm install
+
+7. Configure environment variables:
+
+sudo nano .env
+
+8. Start the server using PM2:
+
+pm2 start ecosystem.config.json
+
+### Client Deployment on AWS S3
+
+1. Build the React application:
+
+cd client
+npm run build
+
+2. Deploy the build files to your S3 bucket.
+
+## Challenges and Notes
+
+- **Project Evolution:** The project has undergone several fundamental changes as it grew, leading to some uncertainties in documentation. Future updates may require additional documentation as new features or modules are added.
+- **Lack of Initial Documentation:** The project started without proper initial documentation, making it difficult to create a comprehensive guide for future development.
+
+## Dependencies
+
+The project relies on the following major dependencies:
+
+### Backend
+
+- Express.js
+- Mongoose (MongoDB ODM)
+- JWT (JSON Web Tokens for authentication)
+- AWS SDK (for S3 integration)
+- Refer package.json for more
+
+### Frontend
+
+- React.js
+- Axios (for API calls)
+- React Router (for routing)
+- Refer package.json for more
+
+### DevOps
+
+- AWS S3 (for static asset hosting)
+- AWS EC2 (for backend hosting)
+
