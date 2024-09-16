@@ -262,7 +262,7 @@ const jobSchema = new mongoose.Schema({
   ],
 });
 
-jobSchema.index({ importerURL: 1, year: 1, status: 1 });
+jobSchema.index({ year: 1, status: 1, detailedStatus: 1 });
 jobSchema.index({ year: 1, job_no: 1 }, { unique: true });
 
 const JobModel = new mongoose.model("Job", jobSchema);

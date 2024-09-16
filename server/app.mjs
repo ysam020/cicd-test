@@ -1,14 +1,5 @@
 import * as Sentry from "@sentry/node";
 import { nodeProfilingIntegration } from "@sentry/profiling-node";
-import logger from "./logger.js";
-
-process.on("uncaughtException", (error) => {
-  logger.error(`Uncaught Exception: ${error.message}`, { stack: error.stack });
-});
-
-process.on("unhandledRejection", (reason, promise) => {
-  logger.error(`Unhandled Rejection at: ${promise} reason: ${reason}`);
-});
 
 import express from "express";
 import cors from "cors";
@@ -199,6 +190,8 @@ import driverAssignment from "./routes/tyre-maintenance/driverAssignment.mjs";
 import getTyreDetails from "./routes/tyre-maintenance/getTyreDetails.mjs";
 import getTruckDetails from "./routes/tyre-maintenance/getTruckDetails.mjs";
 
+import syncDB from "./routes/syncDB.mjs";
+
 const MONGODB_URI =
   process.env.NODE_ENV === "production"
     ? process.env.PROD_MONGODB_URI
@@ -236,6 +229,8 @@ if (cluster.isPrimary) {
       maxPoolSize: 1000,
     })
     .then(async () => {
+      app.use(syncDB);
+
       Sentry.setupExpressErrorHandler(app);
 
       // Optional fallthrough error handler
@@ -246,7 +241,7 @@ if (cluster.isPrimary) {
 
       app.get("/", async (req, res) => {
         try {
-          res.send("hello world 2");
+          res.send("welcome to the exim backend");
         } catch (error) {
           res.status(500).send("An error occurred while updating the jobs");
         }

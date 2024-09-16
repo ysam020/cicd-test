@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import LoginForm from "../forms/LoginForm";
 import "../styles/login.scss";
+import logo from "../assets/images/logo.webp";
+import alluviumLogo from "../assets/images/alluvium-logo.webp";
 
 function LoginPage() {
   const [forgotPassword, setForgotPassword] = useState(false);
@@ -11,11 +13,7 @@ function LoginPage() {
         <Col className="login-left-col"></Col>
         <Col className="login-right-col">
           <div className="login-right-col-inner-container">
-            <img
-              src={require("../assets/images/logo.webp")}
-              alt="logo"
-              width="100%"
-            />
+            <img src={logo} alt="logo" width="100%" />
             <LoginForm
               forgotPassword={forgotPassword}
               setForgotPassword={setForgotPassword}
@@ -24,11 +22,7 @@ function LoginPage() {
 
           <div className="login-footer">
             <p> Version: {process.env.REACT_APP_VERSION}</p>
-            <img
-              src={require("../assets/images/alluvium-logo.webp")}
-              width={80}
-              alt=""
-            />
+            <img src={alluviumLogo} width={80} alt="" />
             <p>
               Powered By:&nbsp;
               <a
