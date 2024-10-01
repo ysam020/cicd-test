@@ -198,7 +198,7 @@ const MONGODB_URI =
     : process.env.NODE_ENV === "server"
     ? process.env.SERVER_MONGODB_URI
     : process.env.DEV_MONGODB_URI;
-
+console.log(MONGODB_URI);
 const numOfCPU = os.availableParallelism();
 
 if (cluster.isPrimary) {
