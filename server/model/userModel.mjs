@@ -11,6 +11,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  is_first_login: { type: Boolean },
   role: { type: String },
   modules: [
     {

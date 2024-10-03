@@ -9,19 +9,17 @@ import { Col, Row } from "react-bootstrap";
 import { SelectedYearContext } from "../../contexts/SelectedYearContext";
 
 function JobsOverView() {
-  const [data, setData] = useState("");
+  const [data, setData] = useState();
   const { selectedYear } = React.useContext(SelectedYearContext);
   useEffect(() => {
     async function getData() {
-      if (selectedYear) {
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_STRING}/get-jobs-overview/${selectedYear}`
-        );
-        setData(res.data);
-      }
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_STRING}/get-jobs-overview/24-25`
+      );
+      setData(res.data);
     }
     getData();
-  }, [selectedYear]);
+  }, []);
 
   return (
     <Row className="jobs-overview">
